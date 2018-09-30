@@ -19,6 +19,7 @@ export default class Helloworld extends cc.Component {
 
     start() {
         this.node.on('mousemove', this.onMouseMove, this);
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.ball.node.on('drop', this.onDrop, this);
         this.node.on('child-removed', this.onChildRemoved, this);
 
@@ -30,6 +31,10 @@ export default class Helloworld extends cc.Component {
                 block.y = y * 45;
             }
         }
+    }
+
+    onTouchMove(event: cc.Event.EventTouch) {
+        this.paddle.x = event.getLocationX() - this.node.x;
     }
 
     onMouseMove(event: cc.Event.EventMouse) {
